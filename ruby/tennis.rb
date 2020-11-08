@@ -59,6 +59,8 @@ class TennisGame2
     result
   end
 
+  private
+
   def p1_score
     @p1_points += 1
   end
