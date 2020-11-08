@@ -17,23 +17,20 @@ class TennisGame2
   end
 
   def score
+    return 'Deuce' if @p1_points == @p2_points && @p1_points > 2
+    return "Win for #{@p1_name}" if @p1_points >= 4 && (@p1_points - @p2_points) >= 2
+    return "Win for #{@p2_name}" if @p2_points >= 4 && (@p2_points - @p1_points) >= 2
+    return "Advantage #{@p1_name}" if @p1_points > @p2_points && @p2_points >= 3
+    return "Advantage #{@p2_name}" if @p2_points > @p1_points && @p1_points >= 3
+
     p1res = SCORES[@p1_points] || ''
     p2res = SCORES[@p2_points] || ''
 
     return "#{p1res}-All" if @p1_points == @p2_points && @p1_points < 3
-    return 'Deuce' if @p1_points == @p2_points && @p1_points > 2
 
     p1res = 'Love' if @p2_points > 0 && @p1_points == 0
     p2res = 'Love' if @p1_points > 0 && @p2_points == 0
-    result = "#{p1res}-#{p2res}"
-
-    result = "Advantage #{@p1_name}" if @p1_points > @p2_points && @p2_points >= 3
-    result = "Advantage #{@p2_name}" if @p2_points > @p1_points && @p1_points >= 3
-
-    result = "Win for #{@p1_name}" if @p1_points >= 4 && (@p1_points - @p2_points) >= 2
-    result = "Win for #{@p2_name}" if @p2_points >= 4 && (@p2_points - @p1_points) >= 2
-
-    result
+    "#{p1res}-#{p2res}"
   end
 
   private
