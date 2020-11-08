@@ -39,21 +39,7 @@ class TennisGame1
   end
 
   def score_in_progress
-    result = ''
-    (1...3).each do |i|
-      if i == 1
-        temp_score = @p1_points
-      else
-        result += '-'
-        temp_score = @p2_points
-      end
-      result += {
-        0 => 'Love',
-        1 => 'Fifteen',
-        2 => 'Thirty',
-        3 => 'Forty'
-      }[temp_score]
-    end
-    result
+    scores = %w[Love Fifteen Thirty Forty]
+    "#{scores[@p1_points]}-#{scores[@p2_points]}"
   end
 end
