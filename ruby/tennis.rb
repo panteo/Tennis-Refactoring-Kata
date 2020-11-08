@@ -16,16 +16,14 @@ class TennisGame3
 
   def score
     if @p1_score < 4 && @p2_score < 4 && (@p1_score + @p2_score < 6)
-      p = %w[Love Fifteen Thirty Forty]
-      s = p[@p1_score]
-      @p1_score == @p2_score ? s + '-All' : s + '-' + p[@p2_score]
+      scores = %w[Love Fifteen Thirty Forty]
+      p1_text = scores[@p1_score]
+      p2_text = scores[@p2_score]
+      @p1_score == @p2_score ? "#{p1_text}-All" : "#{p1_text}-#{p2_text}"
     else
-      if @p1_score == @p2_score
-        'Deuce'
-      else
-        s = @p1_score > @p2_score ? @p1_name : @p2_name
-        (@p1_score - @p2_score) * (@p1_score - @p2_score) == 1 ? 'Advantage ' + s : 'Win for ' + s
-      end
+      return 'Deuce' if @p1_score == @p2_score
+      player = @p1_score > @p2_score ? @p1_name : @p2_name
+      (@p1_score - @p2_score) * (@p1_score - @p2_score) == 1 ? "Advantage #{player}" : "Win for #{player}"
     end
   end
 end
