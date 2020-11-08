@@ -20,42 +20,31 @@ class TennisGame2
     p1res = SCORES[@p1_points] || ''
     p2res = SCORES[@p2_points] || ''
 
-    result = ''
-    if @p1_points == @p2_points && @p1_points < 3
-      result = p1res
-      result += '-All'
-    end
-    if @p1_points == @p2_points && @p1_points > 2
-      result = 'Deuce'
-    end
+    return "#{p1res}-All" if @p1_points == @p2_points && @p1_points < 3
+    return 'Deuce' if @p1_points == @p2_points && @p1_points > 2
 
     if @p1_points > 0 && @p2_points == 0
       p2res = 'Love'
-      result = p1res + '-' + p2res
     end
     if @p2_points > 0 && @p1_points == 0
       p1res = 'Love'
-      result = p1res + '-' + p2res
     end
+    result = "#{p1res}-#{p2res}"
 
-    if @p1_points > @p2_points && @p1_points < 4
-      result = p1res + '-' + p2res
-    end
-    if @p2_points > @p1_points && @p2_points < 4
-      result = p1res + '-' + p2res
-    end
     if @p1_points > @p2_points && @p2_points >= 3
-      result = 'Advantage ' + @p1_name
+      result = "Advantage #{@p1_name}"
     end
     if @p2_points > @p1_points && @p1_points >= 3
-      result = 'Advantage ' + @p2_name
+      result = "Advantage #{@p2_name}"
     end
-    if @p1_points >= 4 && @p2_points >= 0 && (@p1_points-@p2_points) >= 2
-      result = 'Win for ' + @p1_name
+
+    if @p1_points >= 4 && @p2_points >= 0 && (@p1_points - @p2_points) >= 2
+      result = "Win for #{@p1_name}"
     end
-    if @p2_points >= 4 && @p1_points >= 0 && (@p2_points-@p1_points) >= 2
-      result = 'Win for ' + @p2_name
+    if @p2_points >= 4 && @p1_points >= 0 && (@p2_points - @p1_points) >= 2
+      result = "Win for #{@p2_name}"
     end
+
     result
   end
 
