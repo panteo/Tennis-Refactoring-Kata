@@ -23,27 +23,15 @@ class TennisGame2
     return "#{p1res}-All" if @p1_points == @p2_points && @p1_points < 3
     return 'Deuce' if @p1_points == @p2_points && @p1_points > 2
 
-    if @p1_points > 0 && @p2_points == 0
-      p2res = 'Love'
-    end
-    if @p2_points > 0 && @p1_points == 0
-      p1res = 'Love'
-    end
+    p1res = 'Love' if @p2_points > 0 && @p1_points == 0
+    p2res = 'Love' if @p1_points > 0 && @p2_points == 0
     result = "#{p1res}-#{p2res}"
 
-    if @p1_points > @p2_points && @p2_points >= 3
-      result = "Advantage #{@p1_name}"
-    end
-    if @p2_points > @p1_points && @p1_points >= 3
-      result = "Advantage #{@p2_name}"
-    end
+    result = "Advantage #{@p1_name}" if @p1_points > @p2_points && @p2_points >= 3
+    result = "Advantage #{@p2_name}" if @p2_points > @p1_points && @p1_points >= 3
 
-    if @p1_points >= 4 && @p2_points >= 0 && (@p1_points - @p2_points) >= 2
-      result = "Win for #{@p1_name}"
-    end
-    if @p2_points >= 4 && @p1_points >= 0 && (@p2_points - @p1_points) >= 2
-      result = "Win for #{@p2_name}"
-    end
+    result = "Win for #{@p1_name}" if @p1_points >= 4 && (@p1_points - @p2_points) >= 2
+    result = "Win for #{@p2_name}" if @p2_points >= 4 && (@p2_points - @p1_points) >= 2
 
     result
   end
