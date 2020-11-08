@@ -1,4 +1,6 @@
 class TennisGame2
+  SCORES = %w[Love Fifteen Thirty Forty].freeze
+
   def initialize(p1_name, p2_name)
     @p1_name = p1_name
     @p2_name = p2_name
@@ -15,81 +17,31 @@ class TennisGame2
   end
 
   def score
+    p1res = SCORES[@p1_points] || ''
+    p2res = SCORES[@p2_points] || ''
+
     result = ''
     if @p1_points == @p2_points && @p1_points < 3
-      if @p1_points == 0
-        result = 'Love'
-      end
-      if @p1_points == 1
-        result = 'Fifteen'
-      end
-      if @p1_points == 2
-        result = 'Thirty'
-      end
+      result = p1res
       result += '-All'
     end
     if @p1_points == @p2_points && @p1_points > 2
       result = 'Deuce'
     end
 
-    p1res = ''
-    p2res = ''
     if @p1_points > 0 && @p2_points == 0
-      if @p1_points == 1
-        p1res = 'Fifteen'
-      end
-      if @p1_points == 2
-        p1res = 'Thirty'
-      end
-      if @p1_points == 3
-        p1res = 'Forty'
-      end
       p2res = 'Love'
       result = p1res + '-' + p2res
     end
     if @p2_points > 0 && @p1_points == 0
-      if @p2_points == 1
-        p2res = 'Fifteen'
-      end
-      if @p2_points == 2
-        p2res = 'Thirty'
-      end
-      if @p2_points == 3
-        p2res = 'Forty'
-      end
-
       p1res = 'Love'
       result = p1res + '-' + p2res
     end
 
     if @p1_points > @p2_points && @p1_points < 4
-      if @p1_points == 2
-        p1res = 'Thirty'
-      end
-      if @p1_points == 3
-        p1res = 'Forty'
-      end
-      if @p2_points == 1
-        p2res = 'Fifteen'
-      end
-      if @p2_points == 2
-        p2res = 'Thirty'
-      end
       result = p1res + '-' + p2res
     end
     if @p2_points > @p1_points && @p2_points < 4
-      if @p2_points == 2
-        p2res = 'Thirty'
-      end
-      if @p2_points == 3
-        p2res = 'Forty'
-      end
-      if @p1_points == 1
-        p1res = 'Fifteen'
-      end
-      if @p1_points == 2
-        p1res = 'Thirty'
-      end
       result = p1res + '-' + p2res
     end
     if @p1_points > @p2_points && @p2_points >= 3
