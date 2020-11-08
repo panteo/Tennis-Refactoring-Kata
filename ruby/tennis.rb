@@ -6,8 +6,8 @@ class TennisGame3
     @p2_score = 0
   end
 
-  def won_point(n)
-    if n == @p1_name
+  def won_point(player_name)
+    if player_name == @p1_name
       @p1_score += 1
     else
       @p2_score += 1
